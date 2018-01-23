@@ -7,8 +7,8 @@ speaker diarization不同于说话人识别和语音识别，说话人识别是�
 
 ## 处理流程及系统分类
 系统的输入是音频文件的特征，然后进行分割，最后输出的是聚类之后的结果，也就是每一段对应哪一个类别。见图片
-![system | center | 100x0](input_output.png)
-![classification](classify.png)
+![system|center|100x0](input_output.png)
+![classification|center|100x0](classify.png)
 
 ## 评价指标
 评价的标准主要是Diarization Error Rate (DER)，包括了missed speech (MS)，false alarm (FA)，speaker error (SE)
