@@ -1,15 +1,12 @@
 # diarization 调研报告
 
-
 ## 任务定义
-diarization这个任务的过程是，对于一段输入的音频流，首先将其分割为同质的片段，然后再把这些片段分配到特定的源上，源大概包括特定的说话人，音乐或者是背景噪声，也就是所谓的鸡尾酒聚会问题。
+speaker diarization主要是一个针对多人对话场景中的说话人分割和聚类的任务，对于一段输入的音频流，首先要将其分割为多个只包含单个源的片段，然后再把对应于相同源的片段聚为一类，其中的"源"包括不同的说话人，音乐或者是背景噪声，也就是所谓的"鸡尾酒问题"
 
-diarization不同于说话人识别和语音识别，说话人识别是确定说话人的身份(who is speaking)，语音识别是获得人所说的语句(what spoken)，而diarization是解决"who spoke when"的问题，diarization的主要目标就是正确分割音频并将音频片段对应到正确的说话人上，它并不在意说话人的真实身份。
-
-diarization包括了分割和聚类，首先就是要找到音频流中说话人切换的点，然后就是依据说话人的特征将音频片段聚类。
+speaker diarization不同于说话人识别和语音识别，说话人识别是确定说话人的身份(who is speaking)，语音识别是获得说话人的语音内容(what spoken)，diarization是针对"who spoke when"的问题，主要目标就是正确的分割音频并将音频片段与相应的说话人对应，而不关注说话人的真实身份，所以这个任务包括了分割和聚类，也就是先找到音频流中说话人切换的change points，然后就是依据说话人的特征将音频片段进行聚类。
 
 ## 处理流程及系统分类
-输入是音频文件的特征，然后进行分割，最后输出的是聚类之后的结果，也就是每一段对应哪一个类别。见图片
+系统的输入是音频文件的特征，然后进行分割，最后输出的是聚类之后的结果，也就是每一段对应哪一个类别。见图片
 
 ## 评价指标
 评价的标准主要是Diarization Error Rate (DER)，包括了missed speech (MS)，false alarm (FA)，speaker error (SE)
@@ -36,3 +33,5 @@ set of 12 programmes for DNN training only, and a test set of 10 episodes which 
 4. IFLY-DIAR-II database which is drawn from Chinese talk shows, and the sample rate is 16 kHz. The duration of the recordings in the IFLY-DIAR-II database vary from 20 minutes to one hour. The number of speakers in each recording ranges from 2 to 9, and there are generally one host and several guests. The speaking style is spontaneous and causal, and short conversation turns and overlapped speech are often encountered. Furthermore, the speech is corrupted by music, laughter, applause, or other noises. The training set contains 171 recordings (86 hours), the development set consists of 90 conversations (47 hours), and the test set contains 367 audio files (193 hours).
 5. REPERE 2013 data ESTER
 6. development MGB Challenge data set
+
+## 参考论文
