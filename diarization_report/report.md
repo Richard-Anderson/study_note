@@ -57,7 +57,7 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 
 ## 当前主要方法和改进
 因为用的数据集不尽相同，所以没有方法之间详细的结果对比
-### PLDA for i-vector
+### PLDA for i-vector [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
 <p align="left"><img width="40%" src="pic/i-vector_plda.png" /></p>
 
 这个方法的话主要就是在segmentation之后，对于每个segment计算一个i-vector用于表示这个片段，然后用PLDA的方法取代原来的cosine打分，来计算两个片段之间的距离，最后使用层次聚类的方法得到结果。
@@ -65,7 +65,7 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 其中每个片段的长度大概是1-2s，然后迭代结束的条件是用无监督的标注方法得到的。在callhome数据集上的结果如图所示:
 <p align="left"><img width="50%" src="pic/der_of_plda_ivector.png" /></p>
 
-### DNN Embedding
+### DNN Embedding [论文](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
 <p align="left"><img width="35%" src="pic/embedding_plda.png" /></p>
 
 这个embedding的方法就是对于分割之后的每个segment，用定长的embedding向量来表示，避免了i-vector的计算
@@ -78,7 +78,7 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 
 在callhome上面最好的结果是DER=9.9%
 
-### Embedding from DNN hidden layer
+### Embedding from DNN hidden layer [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7362751)
 <p align="left"><img width="50%" src="pic/speaker_embedding.png" /></p>
 
 这个方法中embedding的方式和上面所说的那个不同，根据论文中所说的，考虑到在做说话人识别相关任务的时候，训练的DNN模型在隐层中压缩了很多相关的特征，所以可以从隐层神经元的激活状态中得到一个特征向量，如上图所示，具体的做法就是利用DNN结构中的某一个隐层来作为speaker embedding的向量，这个DNN的输入是从GMM-UBM得到的61440维的超向量<a href="https://www.codecogs.com/eqnedit.php?latex=s_g" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g" title="s_g" /></a>
@@ -92,7 +92,7 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 在ETAPE数据集上的结果:
 <p align="left"><img width="50%" src="pic/der_of_hidden_embedding.png" /></p>
 
-### Cross-show diarization
+### Cross-show diarization [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7472746)
 <p align="left"><img width="50%" src="pic/cross_show.png" /></p>
 
 这种cross-show的方法是主要是在聚类上做了改变，论文中认为传统的AHC，也就是层次聚类的方法无法保证得到一个最优解，所以将聚类的问题转化成ILP (Integer Linear Programming)的形式，这里涉及到一些公式的推导，具体细节看论文，大概的意思就是这种聚类的方法与传统的bottom-up的方法不同，它是定义了一些辅助的隐变量，然后写出一个全局的目标函数，通过最小化类的个数和类内方差来进行计算。而cross-show的方法就是包含了两层的结构，第一层就是分离的操作，进行正常的分割和聚类，第二层利用IPL在全局上再进行一次重新的聚类。
@@ -112,15 +112,14 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 speaker diarization这个任务现在的一个主要问题就是数据集不统一，虽然都是做diarization，但是大家的motivation一般都不一样，所以对数据集的需求也就不一样，所以目前没有一个比较统一的主流数据集，在icassp和interspeech近两年的关于diarization的论文中，用的比较多的数据集有以下几个
 
 ### 1. CALLHOME conversational telephone speech corpus.
-callhome数据集的出现频率最高，它的数据是家庭中的对话场景，CTS collection？所有说话人都是在单一的声道中录制的，每个音频中会有2-7个说话人(一般都是2-4个说话人进行对话)，这个数据集包含了6种语言: 阿拉伯语，英语，德语，日语，普通话和西班牙语。这个数据集主要使用来对训练好的模型进行evaluation，下面分类别列举一些用到该数据集的论文：
+callhome数据集的出现频率最高，它的数据是家庭中的对话场景，CTS collection？所有说话人都是在单一的声道中录制的，每个音频中会有2-7个说话人(一般都是2-4个说话人进行对话)，这个数据集包含了6种语言: 阿拉伯语，英语，德语，日语，普通话和西班牙语。这个数据集主要使用来对训练好的模型进行evaluation，diarization系统中的训练和测试数据集一般都不相同，在训练的时候用的比较多的数据集是SRE，下面列举一些不同的数据集以及相应用到该数据集的论文(部分列举):
 > **callhome全部数据**
 > - [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
 > - [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
+>
 > **callhome英文数据**
-> - [CONVOLUTIONAL NEURAL NETWORK FOR SPEAKER CHANGE DETECTION IN
-TELEPHONE SPEAKER DIARIZATION SYSTEM](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953097)
-> - [Speaker Diarization Using Convolutional Neural Network for Statistics
-Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd24f5a1724c9dbca8b38d.pdf?_ga=2.29293308.1912056220.1516762318-1161727276.1516762318)
+> - [CONVOLUTIONAL NEURAL NETWORK FOR SPEAKER CHANGE DETECTION IN TELEPHONE SPEAKER DIARIZATION SYSTEM](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953097)
+> - [Speaker Diarization Using Convolutional Neural Network for Statistics Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd24f5a1724c9dbca8b38d.pdf?_ga=2.29293308.1912056220.1516762318-1161727276.1516762318)
 
 ### 2. **NIST Rich Transcription evaluation in 2007** 
 [NIST官网](https://www.nist.gov/itl)
@@ -130,8 +129,7 @@ Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd2
 这个数据集主要用来训练GMM-UBM和PLDA，用的比较多的是SRE04，05，06，08
 > - [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
 > - [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
-> - [MULTI-SPEAKER CONVERSATIONS, CROSS-TALK, AND DIARIZATION FOR SPEAKER
-RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
+> - [MULTI-SPEAKER CONVERSATIONS, CROSS-TALK, AND DIARIZATION FOR SPEAKER RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
 
 
 ### 4. IFLY-DIAR-II database 
@@ -141,7 +139,18 @@ RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
 ### 5. REPERE & ESTER
 这是两个法语数据集
 > - [A Triplet Ranking-based Neural Network for Speaker Diarization and Linking](http://www.isca-speech.org/archive/Interspeech_2017/pdfs/0270.PDF)
-> - [Combining speaker turn embedding and incremental structure prediction
-for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)
+> - [Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)
 
 ## 参考论文
+这里只列举了主要的参考文献，其他的还可以看icassp和interspeech近2年关于diarization的文章
+> 1. [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
+> 2. [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
+> 3. [SPEAKER DIARIZATION THROUGH SPEAKER EMBEDDINGS](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7362751)
+> 4. [INVESTIGATION OF SPEAKER EMBEDDINGS FOR CROSS-SHOW SPEAKER DIARIZATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7472746)
+> 5. [Speaker Diarization: A Review of Recent Research](http://www1.icsi.berkeley.edu/~vinyals/Files/taslp2011a.pdf)
+> 6. [Speaker Diarization: Its Developments, Applications, And Challenges](http://eprints.undip.ac.id/36153/1/Hernawan_Sulity.pdf)
+> 7. [An Overview of Automatic Speaker Diarization Systems](https://www.ll.mit.edu/mission/cybersec/publications/publication-files/full_papers/0511_Reynolds1.pdf)
+> 8. [MULTI-SPEAKER CONVERSATIONS, CROSS-TALK, AND DIARIZATION FOR SPEAKER RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
+> 9. [A Triplet Ranking-based Neural Network for Speaker Diarization and Linking](http://www.isca-speech.org/archive/Interspeech_2017/pdfs/0270.PDF)
+> 10. [Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)
+
