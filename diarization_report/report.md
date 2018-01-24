@@ -17,7 +17,7 @@ diarization系统的处理流程大致如下
 ### Segmentation
 <p align="left"><img width="50%" src="pic/segmentation.png" /></p>
 
-segmentation[Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)[Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)就是对于输入的音频特征的序列，首先可以用固定长度将其划分为连续的小窗口，窗口的长度可以根据任务的要求或者是数据的特点来进行调整，相邻的窗口之间可以有overlap，然后就从头开始依次计算每两个窗口之间的距离，然后设定一个阈值，当两个窗口之间的距离超过阈值时，可以认为是发现了一个change point，在此处进行分割。这种计算两个窗口之间距离的方法有很多，常用的有BIC和KL2 distance
+segmentation就是对于输入的音频特征的序列，首先可以用固定长度将其划分为连续的小窗口，窗口的长度可以根据任务的要求或者是数据的特点来进行调整，相邻的窗口之间可以有overlap，然后就从头开始依次计算每两个窗口之间的距离，然后设定一个阈值，当两个窗口之间的距离超过阈值时，可以认为是发现了一个change point，在此处进行分割。这种计算两个窗口之间距离的方法有很多，常用的有BIC和KL2 distance
 
 ### Clustering
 <p align="left"><img width="50%" src="pic/clustering.png" /></p>
@@ -53,11 +53,13 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 <p align="left"><img width="50%" src="pic/der.png" /></p>
 
 最终的DER的计算公式就是三种错误率的和: **DER = MS + FA + SE**
+
 部分论文中使用EER，DCF？来评价结果，还有论文提出了一些新的边界评估框架
 
 ## 当前主要方法和改进
 因为用的数据集不尽相同，所以没有方法之间详细的结果对比
-### PLDA for i-vector [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
+### PLDA for i-vector 
+[paper link](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
 <p align="left"><img width="40%" src="pic/i-vector_plda.png" /></p>
 
 这个方法的话主要就是在segmentation之后，对于每个segment计算一个i-vector用于表示这个片段，然后用PLDA的方法取代原来的cosine打分，来计算两个片段之间的距离，最后使用层次聚类的方法得到结果。
@@ -65,7 +67,8 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 其中每个片段的长度大概是1-2s，然后迭代结束的条件是用无监督的标注方法得到的。在callhome数据集上的结果如图所示:
 <p align="left"><img width="50%" src="pic/der_of_plda_ivector.png" /></p>
 
-### DNN Embedding [论文](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
+### DNN Embedding 
+[paper link](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
 <p align="left"><img width="35%" src="pic/embedding_plda.png" /></p>
 
 这个embedding的方法就是对于分割之后的每个segment，用定长的embedding向量来表示，避免了i-vector的计算
@@ -78,7 +81,8 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 
 在callhome上面最好的结果是DER=9.9%
 
-### Embedding from DNN hidden layer [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7362751)
+### Embedding from DNN hidden layer 
+[paper link](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7362751)
 <p align="left"><img width="50%" src="pic/speaker_embedding.png" /></p>
 
 这个方法中embedding的方式和上面所说的那个不同，根据论文中所说的，考虑到在做说话人识别相关任务的时候，训练的DNN模型在隐层中压缩了很多相关的特征，所以可以从隐层神经元的激活状态中得到一个特征向量，如上图所示，具体的做法就是利用DNN结构中的某一个隐层来作为speaker embedding的向量，这个DNN的输入是从GMM-UBM得到的61440维的超向量<a href="https://www.codecogs.com/eqnedit.php?latex=s_g" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g" title="s_g" /></a>
@@ -92,7 +96,8 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 在ETAPE数据集上的结果:
 <p align="left"><img width="50%" src="pic/der_of_hidden_embedding.png" /></p>
 
-### Cross-show diarization [论文](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7472746)
+### Cross-show diarization 
+[paper link](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7472746)
 <p align="left"><img width="50%" src="pic/cross_show.png" /></p>
 
 这种cross-show的方法是主要是在聚类上做了改变，论文中认为传统的AHC，也就是层次聚类的方法无法保证得到一个最优解，所以将聚类的问题转化成ILP (Integer Linear Programming)的形式，这里涉及到一些公式的推导，具体细节看论文，大概的意思就是这种聚类的方法与传统的bottom-up的方法不同，它是定义了一些辅助的隐变量，然后写出一个全局的目标函数，通过最小化类的个数和类内方差来进行计算。而cross-show的方法就是包含了两层的结构，第一层就是分离的操作，进行正常的分割和聚类，第二层利用IPL在全局上再进行一次重新的聚类。
