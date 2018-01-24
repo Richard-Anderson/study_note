@@ -81,9 +81,9 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 ### Embedding from DNN hidden layer
 <p align="left"><img width="50%" src="pic/speaker_embedding.png" /></p>
 
-这个方法中embedding的方式和上面所说的那个不同，根据论文中所说的，考虑到在做说话人识别相关任务的时候，训练的DNN模型在隐层中压缩了很多相关的特征，所以可以从隐层神经元的激活状态中得到一个特征向量，如上图所示，具体的做法就是利用DNN结构中的某一个隐层来作为speaker embedding的向量，这个DNN的输入是从GMM-UBM得到的61440维的超向量$s_g$
+这个方法中embedding的方式和上面所说的那个不同，根据论文中所说的，考虑到在做说话人识别相关任务的时候，训练的DNN模型在隐层中压缩了很多相关的特征，所以可以从隐层神经元的激活状态中得到一个特征向量，如上图所示，具体的做法就是利用DNN结构中的某一个隐层来作为speaker embedding的向量，这个DNN的输入是从GMM-UBM得到的61440维的超向量<a href="https://www.codecogs.com/eqnedit.php?latex=s_g" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g" title="s_g" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" title="s_g=\frac{1}{\sum_t \gamma_g(t)}\sum_t \gamma_g(t)(x_t-\mu_g)" /></a><a href="https://www.codecogs.com/eqnedit.php?latex=s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" title="s_g=\frac{1}{\sum_t \gamma_g(t)}\sum_t \gamma_g(t)(x_t-\mu_g)" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s_g=\frac{1}{\sum_t&space;\gamma_g(t)}\sum_t&space;\gamma_g(t)(x_t-\mu_g)" title="s_g=\frac{1}{\sum_t \gamma_g(t)}\sum_t \gamma_g(t)(x_t-\mu_g)" /></a>
 
 其中<a href="https://www.codecogs.com/eqnedit.php?latex=\gamma_g(t)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma_g(t)" title="\gamma_g(t)" /></a>是第t帧属于第g个高斯分量的后验概率，<a href="https://www.codecogs.com/eqnedit.php?latex=x_t" target="_blank"><img src="https://latex.codecogs.com/gif.latex?x_t" title="x_t" /></a>表示第t帧，<a href="https://www.codecogs.com/eqnedit.php?latex=\mu_g" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mu_g" title="\mu_g" /></a>表示GMM-UBM的均值。
 <p align="left"><img width="35%" src="pic/embedding_feature.png" /></p>
