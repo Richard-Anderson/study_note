@@ -109,14 +109,35 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 3. 目前diarization的方法不够成熟，普适性较差，无法适用于多个领域(新闻播报，客服电话等)
 
 ## 数据集
-1. CALLHOME conversational telephone speech corpus. We evaluated our systems using the CALLHOME corpus, which is a CTS collection between familiar speakers. Within each conversation, all speakers are recorded in a single channel. There are anywhere between 2 and 7 speakers (with the majority of conversations involving between 2 and 4), and the corpus also is distributed across six languages: Arabic, English, German, Japanese, Mandarin, and
-Spanish.
-2. TBL is TV broadcast data which consists of 22 programmes from a talk–show with single distant microphone
-(SDM) and IHM channels: four speakers as one host and three guests. The recordings have been split into a training
-set of 12 programmes for DNN training only, and a test set of 10 episodes which has a total of 40 speakers and 8749 segments in 5.3 hours of speech time. The audio was manually transcribed to an accuracy of 0.1s
+speaker diarization这个任务现在的一个主要问题就是数据集不统一，虽然都是做diarization，但是大家的motivation一般都不一样，所以对数据集的需求也就不一样，所以目前没有一个比较统一的主流数据集，在icassp和interspeech近两年的关于diarization的论文中，用的比较多的数据集有以下几个
+
+### 1. CALLHOME conversational telephone speech corpus.
+callhome数据集的出现频率最高，它的数据是家庭中的对话场景，CTS collection？所有说话人都是在单一的声道中录制的，每个音频中会有2-7个说话人(一般都是2-4个说话人进行对话)，这个数据集包含了6种语言: 阿拉伯语，英语，德语，日语，普通话和西班牙语。这个数据集主要使用来对训练好的模型进行evaluation，下面分类别列举一些用到该数据集的论文：
+> **callhome全部数据**
+> - [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
+> - [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
+> **callhome英文数据**
+> - [CONVOLUTIONAL NEURAL NETWORK FOR SPEAKER CHANGE DETECTION IN
+TELEPHONE SPEAKER DIARIZATION SYSTEM](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953097)
+> - [Speaker Diarization Using Convolutional Neural Network for Statistics
+Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd24f5a1724c9dbca8b38d.pdf?_ga=2.29293308.1912056220.1516762318-1161727276.1516762318)
+
 3. NIST Rich Transcription evaluation in 2007 & sre10 https://www.nist.gov/itl
+> - [DNN APPROACH TO SPEAKER DIARISATION USING SPEAKER CHANNELS](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953093)
+
+4. SRE
+> - [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
+> - [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
+> - [MULTI-SPEAKER CONVERSATIONS, CROSS-TALK, AND DIARIZATION FOR SPEAKER
+RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
+
+
 4. IFLY-DIAR-II database which is drawn from Chinese talk shows, and the sample rate is 16 kHz. The duration of the recordings in the IFLY-DIAR-II database vary from 20 minutes to one hour. The number of speakers in each recording ranges from 2 to 9, and there are generally one host and several guests. The speaking style is spontaneous and causal, and short conversation turns and overlapped speech are often encountered. Furthermore, the speech is corrupted by music, laughter, applause, or other noises. The training set contains 171 recordings (86 hours), the development set consists of 90 conversations (47 hours), and the test set contains 367 audio files (193 hours).
-5. REPERE 2013 data ESTER
-6. development MGB Challenge data set
+> - [FEATURE MAPPING FOR SPEAKER DIARIZATION IN NOISY CONDITIONS](https://pdfs.semanticscholar.org/798c/3b5ac167ed47be10098a50dcd66f9ecee8dc.pdf)
+
+5. REPERE & ESTER
+> - [A Triplet Ranking-based Neural Network for Speaker Diarization and Linking](http://www.isca-speech.org/archive/Interspeech_2017/pdfs/0270.PDF)
+> - [Combining speaker turn embedding and incremental structure prediction
+for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)
 
 ## 参考论文
