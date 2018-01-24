@@ -73,7 +73,7 @@ diarization系统的评价标准主要是Diarization Error Rate (DER)，这个�
 
 而所有的embedding向量是通过一个DNN的结构得到的，如下图所示，这个DNN的输入是每个segment的特征序列，输出的是一个固定维度(400)的embedding向量，同时还会输出一个对称矩阵S和一个偏置b，这两个输出会在计算两个embedding向量距离的时候用到，DNN中的NIN Layer表示network in network，是一种将大网络拆分的操作，可以加快DNN的速度。
 两个embedding向量之间的距离定义如下，与PLDA相似:
-$$L(x, y)=x^Ty-x^TSx-y^TSy+b$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=L(x,&space;y)=&space;x^Ty-x^TSx-y^TSy&plus;b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(x,&space;y)=&space;x^Ty-x^TSx-y^TSy&plus;b" title="L(x, y)= x^Ty-x^TSx-y^TSy+b" /></a>
 在callhome上面最好的结果是DER=9.9%
 
 ### Embedding from DNN hidden layer
