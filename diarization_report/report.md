@@ -6,7 +6,7 @@ speaker diarization主要是一个针对多人对话场景中的说话人分割�
 speaker diarization不同于说话人识别和语音识别，说话人识别是确定说话人的身份(who is speaking)，语音识别是获得说话人的语音内容(what spoken)，diarization是针对"who spoke when"的问题，主要目标就是正确的分割音频并将音频片段与相应的说话人对应，而不关注说话人的真实身份，所以这个任务包括了分割和聚类，也就是先找到音频流中说话人切换的change points，然后就是依据说话人的特征将音频片段进行聚类。
 
 ## 传统处理流程及系统分类
-diarization系统的输入输出如下图所示，输入的是音频文件的特征，一般采用MFCC特征，然后进行分割，最后输出的是聚类之后的结果，也就是每一个段对应所对应的类别。
+diarization系统的输入输出如下图所示，输入的是音频文件的特征，一般采用MFCC特征，然后进行分割，最后输出的是聚类之后的结果，也就是每一个段所对应的类别。
 <p align="left"><img width="50%" src="pic/input_output.png" /></p>
 
 diarization系统的处理流程大致如下
@@ -17,7 +17,7 @@ diarization系统的处理流程大致如下
 ### Segmentation
 <p align="left"><img width="50%" src="pic/segmentation.png" /></p>
 
-segmentation的话就是对于输入的音频特征的序列，首先可以用固定长度将其划分为连续的小窗口，窗口的长度可以根据任务的要求或者是数据的特点来进行调整，相邻的窗口之间可以有overlap，然后就从头开始依次计算每两个窗口之间的距离，然后设定一个阈值，当两个窗口之间的距离超过阈值时，可以认为是发现了一个change point，在此处进行分割。这种计算两个窗口之间距离的方法有很多，常用的有BIC和KL2 distance
+segmentation[Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)[Combining speaker turn embedding and incremental structure prediction for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)就是对于输入的音频特征的序列，首先可以用固定长度将其划分为连续的小窗口，窗口的长度可以根据任务的要求或者是数据的特点来进行调整，相邻的窗口之间可以有overlap，然后就从头开始依次计算每两个窗口之间的距离，然后设定一个阈值，当两个窗口之间的距离超过阈值时，可以认为是发现了一个change point，在此处进行分割。这种计算两个窗口之间距离的方法有很多，常用的有BIC和KL2 distance
 
 ### Clustering
 <p align="left"><img width="50%" src="pic/clustering.png" /></p>
