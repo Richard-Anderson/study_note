@@ -122,20 +122,24 @@ TELEPHONE SPEAKER DIARIZATION SYSTEM](http://ieeexplore.ieee.org/stamp/stamp.jsp
 > - [Speaker Diarization Using Convolutional Neural Network for Statistics
 Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd24f5a1724c9dbca8b38d.pdf?_ga=2.29293308.1912056220.1516762318-1161727276.1516762318)
 
-3. NIST Rich Transcription evaluation in 2007 & sre10 https://www.nist.gov/itl
+### 2. **NIST Rich Transcription evaluation in 2007** 
+[NIST官网](https://www.nist.gov/itl)
 > - [DNN APPROACH TO SPEAKER DIARISATION USING SPEAKER CHANNELS](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953093)
 
-4. SRE
+### 3. SRE
+这个数据集主要用来训练GMM-UBM和PLDA，用的比较多的是SRE04，05，06，08
 > - [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](http://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf)
 > - [SPEAKER DIARIZATION WITH PLDA I-VECTOR SCORING AND UNSUPERVISED CALIBRATION](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7078610)
 > - [MULTI-SPEAKER CONVERSATIONS, CROSS-TALK, AND DIARIZATION FOR SPEAKER
 RECOGNITION](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7953193)
 
 
-4. IFLY-DIAR-II database which is drawn from Chinese talk shows, and the sample rate is 16 kHz. The duration of the recordings in the IFLY-DIAR-II database vary from 20 minutes to one hour. The number of speakers in each recording ranges from 2 to 9, and there are generally one host and several guests. The speaking style is spontaneous and causal, and short conversation turns and overlapped speech are often encountered. Furthermore, the speech is corrupted by music, laughter, applause, or other noises. The training set contains 171 recordings (86 hours), the development set consists of 90 conversations (47 hours), and the test set contains 367 audio files (193 hours).
+### 4. IFLY-DIAR-II database 
+这个数据集来自于中文的脱口秀，采样率是16kHz，每个音频会包含2-9个说话人，一般是一个主持人和多个嘉宾，说话人的转换比较频繁，重叠也经常发生，同时还存在一些音乐或者是背景噪声，该数据集包含了171个音频(86 hours)
 > - [FEATURE MAPPING FOR SPEAKER DIARIZATION IN NOISY CONDITIONS](https://pdfs.semanticscholar.org/798c/3b5ac167ed47be10098a50dcd66f9ecee8dc.pdf)
 
-5. REPERE & ESTER
+### 5. REPERE & ESTER
+这是两个法语数据集
 > - [A Triplet Ranking-based Neural Network for Speaker Diarization and Linking](http://www.isca-speech.org/archive/Interspeech_2017/pdfs/0270.PDF)
 > - [Combining speaker turn embedding and incremental structure prediction
 for low-latency speaker diarization](http://herve.niderb.fr/download/pdfs/Wisniewski2017.pdf)
