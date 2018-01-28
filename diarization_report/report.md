@@ -125,6 +125,7 @@ callhome数据集的出现频率最高，它的数据是家庭中的对话场景
 > **callhome英文数据**
 > - [CONVOLUTIONAL NEURAL NETWORK FOR SPEAKER CHANGE DETECTION IN TELEPHONE SPEAKER DIARIZATION SYSTEM](http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7953097)
 > - [Speaker Diarization Using Convolutional Neural Network for Statistics Accumulation Refinement](https://pdfs.semanticscholar.org/35c4/0fde977932d8a3cd24f5a1724c9dbca8b38d.pdf?_ga=2.29293308.1912056220.1516762318-1161727276.1516762318)
+> - [SPEAKER DIARIZATION WITH LSTM](https://arxiv.org/pdf/1710.10468.pdf)
 
 ### 2. **NIST Rich Transcription evaluation in 2007** 
 [NIST官网](https://www.nist.gov/itl)
