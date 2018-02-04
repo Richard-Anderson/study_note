@@ -1,5 +1,5 @@
 # study_note
-### 1. diarization report
+### 2. diErization report
 - report
 - callhome
 - kaldi_diarization
