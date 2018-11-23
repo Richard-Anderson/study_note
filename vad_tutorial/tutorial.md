@@ -69,6 +69,7 @@ vad                                     顶层目录
     - 计算结果的脚本是：`tutorial/testdir/tools/criterion.py`
     - 调用格式为`python criterion.py result_mlf_file reference_mlf_file`，即将网络输出经过后处理的mlf格式的结果同标注结果对比，计算指标
     - 测试集的标注：`tutorial/data/test_eval92/mlf`
+6. lstm模型的调用脚本为`run_lstm.sh`
 
 
 
